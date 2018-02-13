@@ -281,7 +281,7 @@ const clientConfig = function webpackConfig(): WebpackConfig {
       disableDotRule: true,
     },
     stats: 'minimal',
-    host: 'cryptodash.dev',
+    host: 'zandraDocs.dev',
     watchOptions: DEV_SERVER_WATCH_OPTIONS
   };
 

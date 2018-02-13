@@ -60,4 +60,27 @@
     <div class="description">
         You can then access the values of <b>id</b> and <b>postId</b> from the request object in your controller.
     </div>
+
+    <div class="title-section">
+        # Route grouping
+    </div>
+
+    <div class="description">
+        You can group routes into logical sections recursively, specifying namespaces for your controllers, uri prefixes and middlewares.
+    </div>
+    <div class="code">
+        <div class="content">
+            <span class="purple">$this</span>-><span class="gold">group</span>([<span class="green">'namespace'</span> => <span class="green">'Api'</span><span class="orange">, </span><span class="green">prefix</span> => <span class="green">'/api'</span>]<span class="orange">,</span> <span class="orange">function</span>(<span class="purple">$router</span>)<br>
+            &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">$this</span>-><span class="gold">group</span>([<span class="green">'namespace'</span> => <span class="green">'Users'</span><span class="orange">, </span><span class="green">prefix</span> => <span class="green">'/users'</span>]<span class="orange">,</span> <span class="orange">function</span>(<span class="purple">$router</span>)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">$this</span>-><span class="gold">get</span>(<span class="green">'/'</span><span class="orange">,</span> <span class="green">'UserController@fetchUsers'</span>)<span class="orange">;</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#125;)<span class="orange">;</span><br>
+            &#125;)<span class="orange">;</span><br>
+        </div>
+    </div>
+    <div class="description">
+        This will actually match the route <b><i>your-app.com/api/users</i></b> and call the method <b>fetchUsers</b>
+        on the controller <b>UserController</b> which has the namespace <b>Api\Users</b>.
+    </div>
 </div>
