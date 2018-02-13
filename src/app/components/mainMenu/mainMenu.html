@@ -1,17 +1,18 @@
 <div class="main-menu">
     <div class="body">
-        <a routerLink="/documentation#routing" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">
-            <div class="menu-item selected">
-                <div class="text">
-                    Routing
-                </div>
+        <a class="menu-item" routerLink="/" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">
+            <div class="text">
+                Routing
             </div>
         </a>
-        <a routerLink="/documentation#requests" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">
-            <div class="menu-item">
-                <div class="text">
-                    Requests
-                </div>
+        <a class="menu-item" routerLink="/controllers" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">
+            <div class="text">
+                Controllers
+            </div>
+        </a>
+        <a class="menu-item" routerLink="/validation" [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{exact:true}">
+            <div class="text">
+                Validation
             </div>
         </a>
     </div>

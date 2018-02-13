@@ -1,0 +1,118 @@
+<div class="controllers-page documentation" data-block-id="1.2">
+    <div class="title-main">
+        Controllers
+    </div>
+
+    <div class="title-section">
+        # Simplest controller
+    </div>
+
+    <div class="description">
+        A request matching the route
+    </div>
+    <div class="code">
+        <div class="content">
+            <span class="purple">$this</span>-><span class="gold">get</span>(<span class="green">'/'</span><span class="orange">,</span> <span class="green">'UserController@index'</span>)<span class="orange">;</span><br>
+        </div>
+    </div>
+    <div class="description">
+        will get routed through the <b>index</b> method of the controller below
+    </div>
+    <div class="code">
+        <div class="filename">App/Http/Controllers/UserController.php</div>
+        <div class="content">
+            <span class="orange">&lt;?php</span><br><br>
+            <span class="orange">namespace</span> App\Http\Controllers<span class="orange">;</span><br><br>
+            <span class="orange">class</span> UserController <span class="orange">extends</span> Controller<br>
+            &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="orange">public function</span> <span class="gold">index</span>()<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="orange">return</span> <span class="purple">$this</span>-><span class="gold">respondOk</span>()<span class="orange">;</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+            &#125;<br>
+        </div>
+    </div>
+    <div class="description">
+        Controller methods handling a request must return a <b>Response</b> object. You can either construct the object yourself
+    </div>
+    <div class="code">
+        <div class="content">
+            <span class="orange">return new</span> Response(Response::<span class="purple">STATUS_OK</span><span class="orange">)</span><span class="orange">;</span><br>
+            // or pass some data<br>
+            <span class="orange">return new</span> Response(Response::<span class="purple">STATUS_OK</span><span class="orange"><span class="orange">, </span>[<span class="green">'someKey'</span> => <span class="green">'someValue'</span>])</span><span class="orange">;</span>
+        </div>
+    </div>
+    <div class="description">
+        or you can use the helper methods of the base constructor class:
+    </div>
+    <div class="code">
+        <div class="content">
+            <span class="orange">return</span> <span class="purple">$this</span>-><span class="gold">respondOk</span>()<span class="orange">;</span><br>
+            <span class="orange">return</span> <span class="purple">$this</span>-><span class="gold">respondBadRequest</span>()<span class="orange">;</span><br>
+            <span class="orange">return</span> <span class="purple">$this</span>-><span class="gold">respondNotFound</span>()<span class="orange">;</span><br>
+        </div>
+    </div>
+
+    <div class="title-section">
+        # Request access
+    </div>
+
+    <div class="description">
+        The request object is available as a property from the base controller class.
+    </div>
+    <div class="code">
+        <div class="content">
+            <span class="orange">public function</span> <span class="gold">index</span>()<br>
+            &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="span purple">$params</span> = <span class="purple">$this</span>-><span class="purple">request</span>-><span class="gold">all</span>()<span class="orange">;</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="orange">return</span> <span class="purple">$this</span>-><span class="gold">respondOk</span>()<span class="orange">;</span><br>
+            &#125;<br>
+        </div>
+    </div>
+
+    <div class="title-section">
+        # Dependency injection
+    </div>
+
+    <div class="description">
+        You can inject dependencies by type hinting classes in your constructor
+    </div>
+    <div class="code">
+        <div class="filename">App/Http/Controllers/UserController.php</div>
+        <div class="content">
+            <span class="orange">&lt;?php</span><br><br>
+            <span class="orange">namespace</span> App\Http\Controllers<span class="orange">;</span><br><br>
+            <span class="orange">class</span> UserController <span class="orange">extends</span> Controller<br>
+            &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="orange">private</span> <span class="purple">$userService</span><span class="orange">;</span><br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="orange">public function</span> <span class="gold">__construct</span>(UserService <span class="purple">$userService</span>)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">$this</span>-><span class="purple">userService</span> = <span class="purple">$userService</span><span class="orange">;</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="orange">public function</span> <span class="gold">fetchUser</span>()<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">$user</span> = <span class="purple">$this</span>-><span class="purple">userService</span>-><span class="gold">getUser</span>(<span class="purple">$this</span>-><span class="purple">request</span>-><span class="gold">all</span>())<span class="orange">;</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="orange">return</span> <span class="purple">$this</span>-><span class="gold">respondOk</span>(<span class="purple">$user</span>)<span class="orange">;</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+            &#125;<br>
+        </div>
+    </div>
+    <div class="description">
+        or you can achieve the same thing by passing the dependencies in your controller's method directly
+    </div>
+    <div class="code">
+        <div class="filename">App/Http/Controllers/UserController.php</div>
+        <div class="content">
+            <span class="orange">&lt;?php</span><br><br>
+            <span class="orange">namespace</span> App\Http\Controllers<span class="orange">;</span><br><br>
+            <span class="orange">class</span> UserController <span class="orange">extends</span> Controller<br>
+            &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="orange">public function</span> <span class="gold">fetchUser</span>(UserService <span class="purple">$userService</span>)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">$user</span> = <span class="purple">$userService</span>-><span class="gold">getUser</span>(<span class="purple">$this</span>-><span class="purple">request</span>-><span class="gold">all</span>())<span class="orange">;</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="orange">return</span> <span class="purple">$this</span>-><span class="gold">respondOk</span>(<span class="purple">$user</span>)<span class="orange">;</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+            &#125;<br>
+        </div>
+    </div>
+</div>

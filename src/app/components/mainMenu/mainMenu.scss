@@ -3,12 +3,19 @@
 $menu-width: 260px;
 $menu-header-height: 120px;
 
+:host {
+  flex-basis: 30%;
+}
+
 .main-menu {
   height: 100%;
-  width: $menu-width;
   margin-right: 20px;
+  display: flex;
+  justify-content: flex-end;
 
   .body {
+    width: $menu-width;
+
     .menu-item {
       height: 40px;
       display: flex;

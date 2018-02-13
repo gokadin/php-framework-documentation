@@ -15,7 +15,9 @@
   .container {
     display: flex;
     height: 100%;
-    width: 60%;
-    margin: 0 auto;
+
+    .content {
+      flex-basis: 70%;
+    }
   }
 }

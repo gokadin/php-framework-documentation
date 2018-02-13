@@ -1,4 +1,4 @@
-<div class="index-page" data-block-id="1.2">
+<div class="index-page documentation" data-block-id="1.2">
     <div class="title-main">
         Routing
     </div>
@@ -82,5 +82,19 @@
     <div class="description">
         This will actually match the route <b><i>your-app.com/api/users</i></b> and call the method <b>fetchUsers</b>
         on the controller <b>UserController</b> which has the namespace <b>Api\Users</b>.
+    </div>
+
+    <div class="title-section">
+        # Catch all routes
+    </div>
+
+    <div class="description">
+        Sometimes we want to catch requests that do not match any of our defined routes and process it. We can do this
+        with "catch all" routes. You have to specify each http verb that you want the route to catch.
+    </div>
+    <div class="code">
+        <div class="content">
+            <span class="purple">$this</span>-><span class="gold">catchAll</span>([<span class="green">'get'</span><span class="orange">, <span class="green">'post'</span></span>]<span class="orange">,</span> <span class="green">'ErrorController@handleRouteNotFound'</span>)<span class="orange">;</span><br>
+        </div>
     </div>
 </div>
