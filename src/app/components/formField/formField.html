@@ -1,0 +1,46 @@
+<div class="form-field" [ngSwitch]="type">
+    <div class="field-container" *ngSwitchCase="'text'">
+        <input type="text"
+               [name]="field.name"
+               [value]="field.value"
+               [placeholder]="placeholder"
+               [formControl]="control"
+               [class.invalid]="field.isTouched && !field.isValid"
+               [class.valid]="field.isTouched && field.isValid"
+               (blur)="updateOnBlur()" />
+        <div class="field-error" *ngIf="field.isTouched">{{ field.error }}</div>
+    </div>
+
+    <div class="field-container" *ngSwitchCase="'textarea'">
+        <textarea [name]="field.name"
+                  [placeholder]="placeholder"
+                  [value]="field.value"
+                  [formControl]="control"
+                  [class.invalid]="field.isTouched && !field.isValid"
+                  [class.valid]="field.isTouched && field.valid"
+                  (blur)="updateOnBlur()"></textarea>
+        <div class="field-error" *ngIf="field.isTouched">{{ field.error }}</div>
+    </div>
+
+    <div class="field-container" *ngSwitchCase="'select'">
+        <select [name]="field.name"
+                [value]="field.value"
+                [formControl]="control"
+                [class.invalid]="field.isTouched && !field.isValid"
+                [class.valid]="field.isToucehd && field.valid">
+            <option *ngFor="let option of options" [value]="option.value">
+                {{ option.display }}
+            </option>
+        </select>
+    </div>
+
+    <div class="field-container" *ngSwitchCase="'checkbox'">
+        <input type="checkbox"
+               [name]="field.name"
+               [value]="field.value"
+               [formControl]="control"
+               [class.invalid]="field.isTouched && !field.isValid"
+               [class.valid]="field.isTouched && field.isValid" />
+        <div class="field-error" *ngIf="field.isTouched">{{ field.error }}</div>
+    </div>
+</div>

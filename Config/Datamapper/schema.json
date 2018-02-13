@@ -1,0 +1,25 @@
+{
+    "Day": {
+        "currency": {
+            "type": "string"
+        },
+        "hours": {
+            "type": "integer"
+        },
+        "amount_mined": {
+            "type": "integer"
+        },
+        "amount_sold": {
+            "type": "string"
+        },
+        "sell_price_usd": {
+            "type": "integer"
+        },
+        "profit_cad": {
+            "type": "integer"
+        },
+        "comments": {
+            "type": "string"
+        }
+    }
+}

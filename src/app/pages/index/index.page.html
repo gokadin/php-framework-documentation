@@ -1,0 +1,63 @@
+<div class="index-page" data-block-id="1.2">
+    <div class="title-main">
+        Routing
+    </div>
+
+    <div class="title-section">
+        # Simplest route
+    </div>
+
+    <div class="description">
+        Routes are defined in the <span class="file">routes.php</span> file. The simplest definition looks like this:
+    </div>
+    <div class="code">
+        <div class="filename">Config/routes.php</div>
+        <div class="content">
+            <span class="orange">&lt;?php</span><br><br>
+            <span class="purple">$this</span>-><span class="gold">get</span>(<span class="green">'/'</span><span class="orange">,</span> <span class="green">'UserController@index'</span>)<span class="orange">;</span><br>
+        </div>
+    </div>
+    <div class="description">
+        This means that when your application receives a <b>GET</b> request matching the url <b>"/"</b>, the method called <b>index</b> will be executed
+        on the controller class called <b>UserController</b>.
+    </div>
+    <div class="description">
+        All of the basic route methods:
+    </div>
+    <div class="code">
+        <div class="content">
+            <span class="purple">$this</span>-><span class="gold">get</span>(<span class="green">'/'</span><span class="orange">,</span> <span class="green">'UserController@fetchUsers'</span>)<span class="orange">;</span><br>
+            <span class="purple">$this</span>-><span class="gold">post</span>(<span class="green">'/'</span><span class="orange">,</span> <span class="green">'UserController@createUser'</span>)<span class="orange">;</span><br>
+            <span class="purple">$this</span>-><span class="gold">put</span>(<span class="green">'/'</span><span class="orange">,</span> <span class="green">'UserController@updateUserInfo'</span>)<span class="orange">;</span><br>
+            <span class="purple">$this</span>-><span class="gold">patch</span>(<span class="green">'/'</span><span class="orange">,</span> <span class="green">'UserController@updatePassword'</span>)<span class="orange">;</span><br>
+            <span class="purple">$this</span>-><span class="gold">delete</span>(<span class="green">'/'</span><span class="orange">,</span> <span class="green">'UserController@deleteUser'</span>)<span class="orange">;</span>
+        </div>
+    </div>
+    <div class="description">
+        You can also match multiple http verbs for the same route.
+    </div>
+    <div class="code">
+        <div class="content">
+            <span class="purple">$this</span>-><span class="gold">many</span>([<span class="green">'put'</span><span class="orange">, </span><span class="green">'patch'</span>]<span class="orange">, </span><span class="green">'/'</span><span class="orange">,</span> <span class="green">'UserController@doLotsOfStuff'</span>)<span class="orange">;</span><br>
+        </div>
+    </div>
+
+    <div class="title-section">
+        # URI parameters
+    </div>
+
+    <div class="description">
+        To match a request with parameters, we simply specify it in the route's uri.
+    </div>
+    <div class="code">
+        <div class="content">
+            <span class="purple">$this</span>-><span class="gold">get</span>(<span class="green">'/users/&#123;id&#125;'</span><span class="orange">,</span> <span class="green">'UserController@fetchUser'</span>)<span class="orange">;</span><br>
+            // will match <i>your-app.com/users/3</i><br><br>
+            <span class="purple">$this</span>-><span class="gold">get</span>(<span class="green">'/users/&#123;id&#125;/posts/&#123;postId&#125;'</span><span class="orange">,</span> <span class="green">'UserController@fetchUserPost'</span>)<span class="orange">;</span><br>
+            // will match <i>your-app.com/users/3/posts/5</i>
+        </div>
+    </div>
+    <div class="description">
+        You can then access the values of <b>id</b> and <b>postId</b> from the request object in your controller.
+    </div>
+</div>

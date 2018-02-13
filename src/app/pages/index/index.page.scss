@@ -1,0 +1,59 @@
+@import "../../variables";
+
+:host {
+  flex: 1;
+}
+
+.index-page {
+  .title-main {
+    font-size: 36px;
+    color: #808080;
+    margin-bottom: 30px;
+  }
+
+  .title-section {
+    font-size: 24px;
+    color: $color-main;
+    margin-bottom: 20px;
+  }
+
+  .description {
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 22px;
+  }
+
+  .code {
+    background-color: #444;
+    border-radius: 4px;
+    margin-bottom: 20px;
+
+    .filename {
+      color: #fff;
+      background-color: $color-main;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      padding: 5px 10px;
+    }
+
+    .content {
+      font-size: 16px;
+      line-height: 28px;
+      color: #cccccc;
+      padding: 10px;
+
+      i {
+        color: #cccccc;
+      }
+
+      .orange { color: $color-code-orange; }
+      .purple { color: $color-code-purple; }
+      .gold { color: $color-code-gold; }
+      .green { color: $color-code-green; }
+    }
+  }
+
+  .file {
+    color: $color-main;
+  }
+}

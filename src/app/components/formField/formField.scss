@@ -1,0 +1,50 @@
+@import "../../variables";
+
+:host {
+  width: 100%;
+}
+
+.form-field {
+  width: 100%;
+
+  .field-container {
+    > input[type="text"],
+    > textarea,
+    > select {
+      border-radius: 0px;
+      border: 1px solid #cccccc;
+      padding: 0 3px;
+      line-height: 30px;
+      width: 100%;
+    }
+
+    > input[type="text"],
+    > select {
+      height: 30px;
+    }
+
+    > input[type="text"]:focus,
+    > textarea:focus {
+      border-color: #444;
+    }
+
+    > input[type="text"].valid,
+    > textarea.valid {
+      border-color: #67b168;
+    }
+
+    > input[type="text"].invalid,
+    > textarea.invalid {
+      border-color: #842210;
+    }
+
+    > select {
+      background-color: white;
+      outline: none;
+    }
+
+    .field-error {
+      color: #842210;
+    }
+  }
+}
