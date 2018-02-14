@@ -8,19 +8,45 @@
     </div>
 
     <div class="description">
-        Controllers have a validator property that lets you validate your requests using rules.
+        The validator object can validate an array of data based on a set of rules, returning a ValidatorResult object
+        containing the success state and a list or errors if any. It can be accessed from the validator property in
+        controllers.
     </div>
     <div class="code">
         <div class="filename">App/Http/Controllers/UserController.php</div>
         <div class="content">
-            <span class="orange">&lt;?php</span><br><br>
-            <span class="orange">namespace</span> App\Http\Controllers<span class="orange">;</span><br><br>
-            <span class="orange">class</span> UserController <span class="orange">extends</span> Controller<br>
+            <span class="orange">public function</span> <span class="gold">fetchUserPost</span>()<br>
             &#123;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<span class="orange">public function</span> <span class="gold">fetchUser</span>()<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">$result</span> = <span class="purple">$this</span>-><span class="purple">validator</span>-><span class="gold">validate</span>(<span class="purple">$this</span>-><span class="purple">request</span>-><span class="gold">all</span>()<span class="orange">, </span>[<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">'id'</span> => <span class="green">'min:1'</span><span class="orange">,</span> // single validation<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">'postId'</span> => [<span class="green">'numeric'</span><span class="orange">,</span> <span class="green">'min:1'</span>]<span class="orange">,</span> // multiple validations<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;])<span class="orange">;</span><br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="orange">if</span> (<span class="purple">!$result</span>-><span class="gold">isValid</span>())<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&#123;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="orange">return</span> <span class="purple">$this</span>-><span class="gold">respondBadRequest</span>(<span class="purple">$result</span>-><span class="gold">errors</span>())<span class="orange">;</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="orange">return</span> <span class="purple">$this</span>-><span class="gold">respondOk</span>()<span class="orange">;</span><br>
             &#125;<br>
         </div>
+    </div>
+    <div class="description">
+        You can also use the helper method <b>validate</b> in the controller, which automatically use the data from the
+        request.
+    </div>
+    <div class="code">
+        <div class="filename">App/Http/Controllers/UserController.php</div>
+        <div class="content">
+            <span class="orange">public function</span> <span class="gold">fetchUserPost</span>()<br>
+            &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">$result</span> = <span class="purple">$this</span>-><span class="gold">validate</span>([<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">'id'</span> => <span class="green">'min:1'</span><span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;])<span class="orange">;</span><br><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;// ...<br>
+            &#125;<br>
+        </div>
+    </div>
+
+    <div class="title-section">
+        # Auto validation
     </div>
 </div>

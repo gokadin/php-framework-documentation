@@ -4,6 +4,7 @@ import { NotFound404Component } from './not-found404.component';
 import {Header} from "./components/header/header";
 import {ValidationPage} from "./pages/validation/validation.page";
 import {ControllersPage} from "./pages/controllers/controllers.page";
+import {EnginePage} from "./pages/engine/engine.page";
 
 export const APP_DECLARATIONS = [
     IndexPage,
@@ -11,5 +12,6 @@ export const APP_DECLARATIONS = [
     Header,
     ValidationPage,
     ControllersPage,
+    EnginePage,
     NotFound404Component,
 ];
