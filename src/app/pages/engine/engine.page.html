@@ -2,4 +2,66 @@
     <div class="title-main">
         Engine
     </div>
+
+    <div class="descriptions">
+        <b>Forget everything you learned about most features of this framework...</b>
+    </div>
+    <div class="description">
+        The engine feature turns the framework into a single request automated CRUD persistence layer. You just need to
+        describe your schema and the rest will be handled automatically. The client will have to send a specific type
+        of request to create, fetch, update and delete your entities.
+    </div>
+
+    <div class="title-section">
+        # Setup
+    </div>
+
+    <div class="description">
+        Enable this feature in the <span class="file">features.php</span> file in your <b>Config</b> directory.
+    </div>
+
+    <div class="title-section">
+        # Create
+    </div>
+
+    <div class="description">
+        You can create a single entity
+    </div>
+    <div class="code">
+        <div class="content">
+            &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"create"</span><span class="orange">:</span> &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"user"</span><span class="orange">:</span> &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"values"</span><span class="orange">:</span> &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"name"</span><span class="orange">: </span><span class="green">"Tom Cruise"</span><span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"age"</span><span class="orange">: </span><span class="green">34</span><span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+            &#125;
+        </div>
+    </div>
+    <div class="description">
+        or multiple ones
+    </div>
+    <div class="code">
+        <div class="content">
+            &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"create"</span><span class="orange">:</span> &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"user"</span><span class="orange">:</span> &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"values"</span><span class="orange">:</span> [<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"name"</span><span class="orange">: </span><span class="green">"Tom Cruise"</span><span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"age"</span><span class="orange">: </span><span class="green">34</span><span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"name"</span><span class="orange">: </span><span class="green">"Jennifer Lopez"</span><span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"age"</span><span class="orange">: </span><span class="green">32</span><span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+            &#125;
+        </div>
+    </div>
 </div>
