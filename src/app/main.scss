@@ -835,10 +835,20 @@ input[type="radio"].custom-input-1 {
     margin-bottom: 20px;
   }
 
+  .title-sub-section {
+    font-size: 22px;
+    color: #444;
+    margin-bottom: 15px;
+  }
+
   .description {
     font-size: 18px;
     margin-bottom: 20px;
     line-height: 22px;
+
+    .list {
+      margin: 10px 0 0 50px;
+    }
   }
 
   .code {

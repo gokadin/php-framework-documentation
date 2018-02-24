@@ -17,7 +17,126 @@
     </div>
 
     <div class="description">
-        Enable this feature in the <span class="file">features.php</span> file in your <b>Config</b> directory.
+        First,  enable this feature in the <span class="file">Config/features.php</span> file.<br><br>
+        Then, configure your schema (see below). <br><br>
+        Finally, from your application's root directory, run <b>php engine sync</b>. This will create your database
+        tables. Run this command again every time you make a change to your schema and it will update your database
+        accordingly.
+    </div>
+    <div class="title-sub-section">
+        The schema file
+    </div>
+    <div class="description">
+        Describe your schema in the <span class="file">Config/Schema/schema.php</span> file. Here is a sample:
+    </div>
+    <div class="code">
+        <div class="filename">Config/Schema/schema.php</div>
+        <div class="content">
+            <span class="orange">&lt;?php</span><br><br>
+            <span class="orange">return</span> [<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="green">'user'</span> => [<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">'name'</span> => [<span class="green">'type'</span> => <span class="green">'string'</span>]<span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">'email'</span> => [<span class="green">'type'</span> => <span class="green">'string'</span>]<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;]<span class="orange">, </span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="green">'post'</span> => [<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">'title'</span> => [<span class="green">'type'</span> => <span class="green">'string'</span>]<span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">'text'</span> => [<span class="green">'type'</span> => <span class="green">'text'</span>]<span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">'rating'</span> => [<span class="green">'type'</span> => <span class="green">'integer'</span>]<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;]<br>
+            ]<span class="orange">;</span>
+        </div>
+    </div>
+    <div class="description">
+        This is the minimal required configuration. The <b>id</b> field and <b>timestamp</b> fields (<b>created_at</b> and <b>updated_at</b>) are added and managed automatically.<br>
+        These are all of the field types you can use and their optional arguments:<br>
+        <ul class="list">
+            <li>integer</li>
+            <li>decimal</li>
+            <li>string</li>
+            <li>text</li>
+            <li>datetime</li>
+        </ul>
+    </div>
+    <div class="description">
+        You can specify optional arguments to further configure your fields:<br>
+        <ul class="list">
+            <li>size, for specifying the maximum size of <b>integer</b> fields</li>
+            <li>nullable, true or false, this is true by default</li>
+            <li>default, the default value if it's null in the database</li>
+        </ul>
+    </div>
+    <div class="description">
+        And this is how to use those arguments in the schema definition:
+    </div>
+    <div class="code">
+        <div class="filename">Config/Schema/schema.php</div>
+        <div class="content">
+            <span class="orange">&lt;?php</span><br><br>
+            <span class="orange">return</span> [<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="green">'user'</span> => [<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">'name'</span> => [<span class="green">'type'</span> => <span class="green">'string'</span><span class="orange">, </span><span class="green">'nullable'</span> => <span class="green">'true'</span>]<span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">'email'</span> => [<span class="green">'type'</span> => <span class="green">'string'</span><span class="orange">, </span><span class="green">'size'</span> => 50]<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;]<span class="orange">, </span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="green">'post'</span> => [<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">'title'</span> => [<span class="green">'type'</span> => <span class="green">'string'</span><span class="orange">, </span><span class="green">'default'</span> => <span class="green">'untitled'</span>]<span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">'text'</span> => [<span class="green">'type'</span> => <span class="green">'text'</span>]<span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">'rating'</span> => [<span class="green">'type'</span> => <span class="green">'integer'</span>]<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;]<br>
+            ]<span class="orange">;</span>
+        </div>
+    </div>
+    <div class="title-sub-section">
+        Defining relationships
+    </div>
+    <div class="description">
+        to do...
+    </div>
+    <div class="title-sub-section">
+        Splitting schema in multiple files
+    </div>
+    <div class="description">
+        to do...
+    </div>
+
+    <div class="title-section">
+        # Fetch
+    </div>
+
+    <div class="description">
+        Fetch entities by specifying which fields you want for each type. This will return all of the users and posts
+        in your database in json format.
+    </div>
+    <div class="code">
+        <div class="content">
+            &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"fetch"</span><span class="orange">:</span> &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"user"</span><span class="orange">:</span> &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"fields"</span><span class="orange">:</span> [<span class="purple">"id"</span><span class="orange">, </span><span class="purple">"name"</span><span class="orange">, </span><span class="purple">"email"</span>]<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<span class="orange">, </span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"post"</span><span class="orange">:</span> &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"fields"</span><span class="orange">:</span> [<span class="purple">"title"</span>]<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+            &#125;
+        </div>
+    </div>
+    <div class="description">
+        You can also configure each field by turning the array of fields into an object. You can specify:<br>
+
+    </div>
+    <div class="code">
+        <div class="content">
+            &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"fetch"</span><span class="orange">:</span> &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"user"</span><span class="orange">:</span> &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"fields"</span><span class="orange">:</span> &#123;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"name"</span><span class="orange">: </span>&#123;<span class="purple">"as"</span><span class="orange">: </span><span class="green">"fullName"</span>&#125;<span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"email"</span><span class="orange">: </span>&#123;<span class="purple">"as"</span><span class="orange">: </span><span class="green">"username"</span>&#125;<span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
+            &#125;
+        </div>
     </div>
 
     <div class="title-section">
@@ -34,7 +153,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"user"</span><span class="orange">:</span> &#123;<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"values"</span><span class="orange">:</span> &#123;<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"name"</span><span class="orange">: </span><span class="green">"Tom Cruise"</span><span class="orange">,</span><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"age"</span><span class="orange">: </span><span class="green">34</span><span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"email"</span><span class="orange">: </span><span class="green">"tom.cruise@tomcruise.com"</span><span class="orange">,</span><br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
@@ -52,11 +171,11 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"values"</span><span class="orange">:</span> [<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"name"</span><span class="orange">: </span><span class="green">"Tom Cruise"</span><span class="orange">,</span><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"age"</span><span class="orange">: </span><span class="green">34</span><span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"email"</span><span class="orange">: </span><span class="green">"tom.cruise@tomcruise.com"</span><span class="orange">,</span><br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<span class="orange">,</span><br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"name"</span><span class="orange">: </span><span class="green">"Jennifer Lopez"</span><span class="orange">,</span><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"age"</span><span class="orange">: </span><span class="green">32</span><span class="orange">,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">"email"</span><span class="orange">: </span><span class="green">"jennifer.lopez@jenniferlopez.com"</span><span class="orange">,</span><br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br>
@@ -64,4 +183,6 @@
             &#125;
         </div>
     </div>
+
+
 </div>
