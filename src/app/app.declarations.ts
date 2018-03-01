@@ -5,6 +5,7 @@ import {Header} from "./components/header/header";
 import {ValidationPage} from "./pages/validation/validation.page";
 import {ControllersPage} from "./pages/controllers/controllers.page";
 import {EnginePage} from "./pages/engine/engine.page";
+import {MiddlewaresPage} from "./pages/middlewares/middlewares.page";
 
 export const APP_DECLARATIONS = [
     IndexPage,
@@ -13,5 +14,6 @@ export const APP_DECLARATIONS = [
     ValidationPage,
     ControllersPage,
     EnginePage,
+    MiddlewaresPage,
     NotFound404Component,
 ];
